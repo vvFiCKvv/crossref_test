@@ -28,7 +28,7 @@ export class PublicationsService {
         if (isNaN(params.offset)) {
             params.offset = 0;
         }
-        console.log('Getting from db publications limit:', params.limit, 'offset:', params.offset);
+        //console.log('Getting from db publications limit:', params.limit, 'offset:', params.offset);
         return await this.db.publicationModel.aggregate([
             { "$sort": { "doi": 1 } },
             { "$limit": params.offset + params.limit },
