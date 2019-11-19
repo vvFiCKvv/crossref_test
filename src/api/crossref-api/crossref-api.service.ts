@@ -9,6 +9,9 @@ export class CrossrefApiService {
             console.log(data);
         });
     }
+    /**
+     * Request Works from crossref API 
+     */
     async getWorks(): Promise<IPublication[]> {
         return new Promise<IPublication[]>((resolve, reject) => {
             request('http://api.crossref.org/works/', { json: true }, (err, res, body) => {
@@ -22,7 +25,12 @@ export class CrossrefApiService {
             });
         });
     }
+    /**
+     * Parse and convert crossref request body to IPublication Array
+     * @param body 
+     */
     public parseBody(body: { message?: { items?: IPublication[] } }) {
+        //TODO: use https://github.com/hapijs/joi to validate the schema
         let pubs = <IPublication[]>[];
         if (body && body.message && body.message.items && body.message.items.length) {
             pubs = body.message.items.map((x: any) => (<IPublication>{
