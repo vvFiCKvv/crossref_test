@@ -7,8 +7,8 @@ export class ArticlesController {
     constructor(private readonly publicationsService: PublicationsService) { }
 
     @Get()
-    articles(@Query('offset') offset: string, @Query('limit') limit: string): IPublication[] {
+    async articles(@Query('offset') offset: string, @Query('limit') limit: string): Promise<IPublication[]> {
 
-      return this.publicationsService.get({ offset: parseInt(offset), limit: parseInt(limit) });
+      return await this.publicationsService.get({ offset: parseInt(offset), limit: parseInt(limit) });
     }
 }
